@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:insert="~{layout::head}">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<nav th:insert="~{layout::menu}"></nav>
+<br />
+<div class="card">
+    <div class="card-header text-bg-secondary">
+        Mantenimiento de Categorias
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">Lista de categorías</h5>
+        <a th:href="@{/product/create}" class="btn btn-primary">Agregar</a>
+
+        <hr />
+
+        <table id="tblproduct" class="table">
+            <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Producto</th>
+                <th scope="col">Precio Unitario</th>
+                <th scope="col">Categoria</th>
+                <th scope="col">Proveedor</th>
+                <th scope="col">Actualizar</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="product :${listproduct}" th:classappend="${product.discontinued} ? 'table-danger' : ''">
+                <td th:text="${product.productid}"></td>
+                <td th:text="${product.productname}"></td>
+                <td th:text="${product.unitprice}"></td>
+                <td th:text="${product.categories.categoryname}"></td>
+                <td th:text="${product.suppliers.companyname}"></td>
+                <td>
+                    <a th:href="@{/product/edit/{id}(id=${product.productid})}" class="btn btn-warning">Editar</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>
+</body>
+</html>

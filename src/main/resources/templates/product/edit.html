@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:insert="~{layout::head}">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<nav th:insert="~{layout::menu}"></nav>
+<br />
+<div class="card">
+    <div class="card-header text-bg-secondary">
+        Mantenimiento de Productos
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">Actualizar de productos</h5>
+        <hr />
+        <form th:action="@{/product/edit}" method="post" th:object="${product}">
+            <input type="hidden" th:field="*{productid}">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" th:field="*{productname}" id="txtproductname" placeholder="name@example.com">
+                <label for="txtproductname">Nombre del producto:</label>
+            </div>
+            <div class="mb-3">
+                <label for="cbocategory" class="form-label">Categoria:</label>
+                <select class="form-select" th:field="*{categoryid}" aria-label="Default select example" id="cbocategory">
+                    <option th:each="category :${listcategory}" th:text="${category.categoryname}" th:value="${category.categoryid}"></option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="cbosupplier" class="form-label">Proveedor:</label>
+                <select class="form-select" th:field="*{supplierid}" aria-label="Default select example" id="cbosupplier">
+                    <option th:each="supplier :${listsupplier}" th:text="${supplier.companyname}" th:value="${supplier.supplierid}"></option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="cbosupplier" class="form-label">Discontinueado:</label>
+                <select class="form-select" th:field="*{discontinued}" aria-label="Default select example" id="cbodiscontinued">
+                    <option value="true">SI</option>
+                    <option value="false">NO</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Registrar</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>
